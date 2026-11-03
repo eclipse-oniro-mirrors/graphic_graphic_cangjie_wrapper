@@ -15,6 +15,7 @@
 
 package ohos.graphics.color_space_manager
 
+import ohos.business_exception.BusinessException
 import ohos.labels.APILevel
 
 @!APILevel[
@@ -263,6 +264,43 @@ public enum ColorSpace {
     ]
     Custom
     | ...
+
+    protected func getValue(): UInt32 {
+        return match (this) {
+            case Unknown => 0
+            case AdobeRgb1998 => 1
+            case DciP3 => 2
+            case DisplayP3 => 3
+            case Srgb => 4
+            case Custom => 5
+            case Bt709 => 6
+            case Bt601Ebu => 7
+            case Bt601SmpteC => 8
+            case Bt2020Hlg => 9
+            case Bt2020Pq => 10
+            case P3Hlg => 11
+            case P3Pq => 12
+            case AdobeRgb1998Limit => 13
+            case DisplayP3Limit => 14
+            case SrgbLimit => 15
+            case Bt709Limit => 16
+            case Bt601EbuLimit => 17
+            case Bt601SmpteCLimit => 18
+            case Bt2020HlgLimit => 19
+            case Bt2020PqLimit => 20
+            case P3HlgLimit => 21
+            case P3PqLimit => 22
+            case LinearP3 => 23
+            case LinearSrgb => 24
+            case LinearBt709 => 24
+            case LinearBt2020 => 25
+            case DisplaySrgb => 4
+            case DisplayP3Srgb => 3
+            case DisplayP3Hlg => 11
+            case DisplayP3Pq => 12
+            case _ => throw BusinessException(18600001, "Parameter value is abnormal.")
+        }
+    }
 }
 
 extend ColorSpace <: ToString {
